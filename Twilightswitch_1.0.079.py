@@ -12,6 +12,7 @@
 #    - Moved Global out of update_times() - prevent multiple definition?
 #    - Added the time string as name to each switching job.
 #    - Moved update log into update_times()
+#    - Amended logging method within switching functions
 #    - Is there a way to list all schedules that have been set?
 #    - Suspect post midnight update has set another switch_off but before first has run. Second would then be later as twilight time has changed.
 #    - Try: Incorporate clearing of schedules by tag '_relay'
@@ -35,12 +36,14 @@ from subprocess import Popen, PIPE
 
 def switch_off(off_at):
 	automationhat.relay.one.off()
-	logging.info('Relay switched off ', off_at)
+	theLog = 'Relay switched off at: ' + off_at
+	logging.info(theLog)
 	return schedule.CancelJob
 
 def switch_on(on_at):
 	automationhat.relay.one.on()
-	logging.info('Relay switched on ', on_at)
+	theLog = 'Relay switched off at: ' + on_at
+	logging.info(theLog)
 	return schedule.CancelJob
 
 def run_check():
