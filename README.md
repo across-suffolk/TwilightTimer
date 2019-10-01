@@ -13,6 +13,12 @@ PHP includes a function called [date_sun_info](https://www.php.net/manual/en/fun
 The Python script uses the subprocess module to activate a PHP script (preset with lat/long) and echo the times, which are piped back into Python.
 Python then decodes the byte data into strings and timestamps for use in scheduling and logging.
 
+The [scheduler module](https://github.com/dbader/schedule) by @dbader/schedule is used to create four jobs.
+ 1. Call PHP script to update times. Runs every day at 01:30.
+ 2. Trigger a log entry every 30 minutes, to approximate time if system fails/
+ 3. One-off relay_on job.
+ 4. One-off relay_off job.
+
 The smaller AutomationPhat by Pimoroni is used to switch the camera on and off, controlled by the [automationhat module](https://learn.pimoroni.com/tutorial/sandyj/getting-started-with-automation-hat-and-phat). Note: this is the same module as used by the larger AutomationHat, hence the spelling. 
 
 The system is to run headerless and without any echo or text output. The logging module is used to record activity, which also picks up logging output from the schedule module. The os module is used to create a timestamp file name for the log file each time the script is run. https://realpython.com/python-logging/
