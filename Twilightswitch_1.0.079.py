@@ -103,13 +103,13 @@ update_times()
 #Check if relay should be on right now:
 if now_t < pre_midnight and now_t > on_t:
 	logging.info("Initialised before midnight and after twilight begins, switch relay on")
-	switch_on()
+	switch_on(on_str)
 elif now_t > aft_midnight and now_t < off_t: 
 	logging.info("Initialised after midnight and before twilight ends, ")
-	switch_on()
+	switch_on(on_str)
 else:
 	logging.info("Initialised when relay should be switched OFF")
-	switch_off() #automationhat.relay.one.off()
+	switch_off(off_str) #automationhat.relay.one.off()
 
 #Set update schedule and a check to log that the system is still running
 schedule.every().day.at("01:30").do(update_times)
