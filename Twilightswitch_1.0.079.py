@@ -10,7 +10,8 @@
 #    - Changed if statement to elif & moved initial switch off into Else statement.
 #079 - 2nd Attempt:
 #    - Moved Global out of update_times() - prevent multiple definition?
-#    - Try: Scheduling job with time string as name to track which is cancelling
+#    - Added the time string as name to each switching job.
+#    - Moved update log into update_times()
 #    - Is there a way to list all schedules that have been set?
 #    - Suspect post midnight update has set another switch_off but before first has run. Second would then be later as twilight time has changed.
 #    - Try: Incorporate clearing of schedules by tag '_relay'
@@ -33,14 +34,14 @@ global off_t, on_t, off_str, on_str
 #--  Functions  --#
 #-----------------#
 
-def switch_off():
+def switch_off(off_at):
 	automationhat.relay.one.off()
-	logging.info('Relay switched off')
+	logging.info('Relay switched off ', off_at)
 	return schedule.CancelJob
 
-def switch_on():
+def switch_on(on_at):
 	automationhat.relay.one.on()
-	logging.info('Relay switched on')
+	logging.info('Relay switched on ', on_at)
 	return schedule.CancelJob
 
 def run_check():
@@ -65,9 +66,10 @@ def update_times():
 	off_str = theTimes[4:9]
 	on_str = theTimes[12:17]
 	#Set relay schedules
-	schedule.every().day.at(off_str).do(switch_off)
-	schedule.every().day.at(on_str).do(switch_on)
-	logging.info('Schedules are set')
+	schedule.every().day.at(off_str).do(switch_off, off_at = off_str)
+	schedule.every().day.at(on_str).do(switch_on, on_at = on_str)
+	theLog = 'Times updated. Switch on at: ' + on_str + ' Switch off at: ' + off_str
+	logging.info(theLog)
 
 #------------------#
 #--  Initialise  --#
@@ -96,8 +98,7 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', datefmt=
 
 #First run of the script to initialise
 update_times()
-theLog = 'Initialised. Switch on at: ' + on_str + ' Switch off at: ' + off_str
-logging.info(theLog)
+
 
 #Check if relay should be on right now:
 if now_t < pre_midnight and now_t > on_t:
