@@ -18,7 +18,7 @@ The smaller AutomationPhat by Pimoroni is used to switch the camera on and off, 
 The system is to run headerless and without any echo or text output. The logging module is used to record activity, which also picks up logging output from the schedule module. The os module is used to create a timestamp file name for the log file each time the script is run. https://realpython.com/python-logging/
 
 ## Issues yet to resolve
-(a) The log shows that the job function 'switch_off' is being called twice, two minutes apart, with the first occuring on time according to the schedule times obtained by PHP. Unusual that the second event occurs exactly 2 minutes later. 
+1. The log shows that the job function 'switch_off' is being called twice, two minutes apart, with the first occuring on time according to the schedule times obtained by PHP. Unusual that the second event occurs exactly 2 minutes later. 
 * Could this be caused by serial schedules being set, one before midnight and one after
 * The two minute difference may vary if the first schedule is set based on the previous days calculated times
 * (currently very near to equinox).
@@ -26,12 +26,12 @@ The system is to run headerless and without any echo or text output. The logging
   * Run one-off jobs as tagged scheules (relayJob) and clear these jobs each time PHP is run.
   * Run schedules as multi-treaded.
 
-(b) SSH login needs to be secure - use SHA keys.
+2. SSH login needs to be secure - use SHA keys.
 
-(c) Script needs to auto run at boot.
+3. Script needs to auto run at boot.
 
-(d) Run script in the background.
+4. Run script in the background.
 
-(e) Need some method to stop the script and reset or shutdown the PiZ - short press or long press of button (GPIO).
+5. Need some method to stop the script and reset or shutdown the PiZ - short press or long press of button (GPIO).
 
-(f) May want LED indicators to show current settings and aid changing of settings - simple feedback and input.
+6. May want LED indicators to show current settings and aid changing of settings - simple feedback and input.
