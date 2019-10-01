@@ -2,10 +2,10 @@
 Off-line variable twilight timer written in Python, using PHP.
 
 ## Objective
-1. A simple timer running on a Raspberry Pi Zero-W (PiZ), with a relay to control activation of a sky camera. 
+1. A simple timer running on a Raspberry Pi Zero-W (R-Pi), with a relay to control activation of a sky camera. 
 2. The camera is very light sensitive and needs to switch on at [Astronomical Twilight](https://www.timeanddate.com/astronomy/different-types-twilight.html)
 3. The timer must continue to operate regardless of whether internet access is available.
-4. Ideally the Pi-Z would be powered by the same 12v supply used by the camera (less power bricks).
+4. Ideally the R-Pi would be powered by the same 12v supply used by the camera (less power bricks).
 5. Adjustment of times *may* be needed via simple buttons. Power off button will be useful to prevent sd-card corruption.
 
 ## Solution
@@ -21,16 +21,18 @@ The [schedule module](https://github.com/dbader/schedule) by @dbader is used to 
 
 The smaller AutomationPhat by Pimoroni is used to switch the camera on and off, controlled by the [automationhat module](https://learn.pimoroni.com/tutorial/sandyj/getting-started-with-automation-hat-and-phat). Note: this is the same module as used by the larger AutomationHat, hence the spelling. 
 
-The system is to run headerless and without any echo or text output. The logging module is used to record activity, which also picks up logging output from the schedule module. The os module is used to create a timestamp file name for the log file each time the script is run. https://realpython.com/python-logging/
+The system will run headerless and without any echo or text output, access for maintenance or update is via SSH.
+The [logging module](https://realpython.com/python-logging/) is used to record activity, which also picks up logging output from the schedule module. 
+The os module is used to create a timestamp file name for the log file each time the script is run. 
 
 ## Issues yet to resolve
 1. The log shows that the job function 'switch_off' is being called twice, two minutes apart, with the first occuring on time according to the schedule times obtained by PHP. Unusual that the second event occurs exactly 2 minutes later. 
-* Could this be caused by serial schedules being set, one before midnight and one after
-* The two minute difference may vary if the first schedule is set based on the previous days calculated times
-* (currently very near to equinox).
-* Possible solutions
-  * Run one-off jobs as tagged scheules (relayJob) and clear these jobs each time PHP is run.
-  * Run schedules as multi-treaded.
+   * Could this be caused by serial schedules being set, one before midnight and one after
+   * The two minute difference may vary if the first schedule is set based on the previous days calculated times
+   * (currently very near to equinox).
+   * Possible solutions
+     * Run one-off jobs as tagged scheules (relayJob) and clear these jobs each time PHP is run.
+     * Run schedules as multi-treaded.
 
 2. SSH login needs to be secure - use SHA keys.
 
