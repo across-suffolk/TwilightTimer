@@ -36,13 +36,13 @@ from subprocess import Popen, PIPE
 
 def switch_off(off_at):
 	automationhat.relay.one.off()
-	theLog = 'Relay switched off at: ' + off_at
+	theLog = 'Relay switched off. Defined time = ' + off_at
 	logging.info(theLog)
 	return schedule.CancelJob
 
 def switch_on(on_at):
 	automationhat.relay.one.on()
-	theLog = 'Relay switched off at: ' + on_at
+	theLog = 'Relay switched on. Defined time = ' + on_at
 	logging.info(theLog)
 	return schedule.CancelJob
 
@@ -106,13 +106,13 @@ update_times()
 #Check if relay should be on right now:
 if now_t < pre_midnight and now_t > on_t:
 	logging.info("Initialised before midnight and after twilight begins, switch relay on")
-	switch_on(on_str)
+	switch_on("Initialise")
 elif now_t > aft_midnight and now_t < off_t: 
 	logging.info("Initialised after midnight and before twilight ends, ")
-	switch_on(on_str)
+	switch_on("Initialise")
 else:
 	logging.info("Initialised when relay should be switched OFF")
-	switch_off(off_str) #automationhat.relay.one.off()
+	switch_off("Initialise") #automationhat.relay.one.off()
 
 #Set update schedule and a check to log that the system is still running
 schedule.every().day.at("01:30").do(update_times)
