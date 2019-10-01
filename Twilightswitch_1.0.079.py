@@ -27,7 +27,6 @@
 import datetime, time, schedule, automationhat, logging, os, sys
 from subprocess import Popen, PIPE
 
-global off_t, on_t, off_str, on_str
 
 
 #-----------------#
@@ -50,6 +49,7 @@ def run_check():
 	return toSender
 
 def update_times():
+	global off_t, on_t, off_str, on_str
 	p = Popen("php times_output_070.php", shell=True, stdout=PIPE) #Run PHP script needs shell=True to run.
 	logging.info('update_times() Script activated')
 	getResult = p.stdout.read().decode('ascii') #outputs in bytes, needs to be decoded.
