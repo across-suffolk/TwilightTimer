@@ -23,12 +23,12 @@ The system is to run headerless and without any echo or text output. The logging
 
 ## Issues yet to resolve
 (a)The log shows that the job function 'switch_off' is being called twice, two minutes apart, with the first occuring on time according to the schedule times obtained by PHP. Unusual that the second event occurs exactly 2 minutes later. 
-    - Could this be caused by serial schedules being set, one before midnight and one after?
-    - The two minute difference may vary if the first schedule is set based on the previous days calculated times
-    - (currently very near to equinox).
-    - Possible solutions
-        - Run one-off jobs as tagged scheules (relayJob) and clear these jobs each time PHP is run.
-        - Run schedules as multi-treaded.
+    * Could this be caused by serial schedules being set, one before midnight and one after
+    * The two minute difference may vary if the first schedule is set based on the previous days calculated times
+    * (currently very near to equinox).
+    * Possible solutions
+        * Run one-off jobs as tagged scheules (relayJob) and clear these jobs each time PHP is run.
+        * Run schedules as multi-treaded.
 
 (b) SSH login needs to be secure - use SHA keys.
 
