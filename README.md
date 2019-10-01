@@ -13,9 +13,9 @@ PHP includes a function called [date_sun_info](https://www.php.net/manual/en/fun
 The Python script uses the subprocess module to activate a PHP script (preset with lat/long) and echo the times, which are piped back into Python.
 Python then decodes the byte data into strings and timestamps for use in scheduling and logging.
 
-The [scheduler module](https://github.com/dbader/schedule) by @dbader/schedule is used to create four jobs.
+@dbader/schedule [module](https://github.com/dbader/schedule) is used to create four jobs.
  1. Call PHP script to update times. Runs every day at 01:30.
- 2. Trigger a log entry every 30 minutes, to approximate time if system fails/
+ 2. Trigger a log entry every 30 minutes, to approximate time if system fails.
  3. One-off relay_on job.
  4. One-off relay_off job.
 
@@ -36,7 +36,7 @@ The system is to run headerless and without any echo or text output. The logging
 
 3. Script needs to auto run at boot.
 
-4. Run script in the background.
+4. Run script in the background (use $ in shell).
 
 5. Need some method to stop the script and reset or shutdown the PiZ - short press or long press of button (GPIO).
 
