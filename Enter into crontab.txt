@@ -1,0 +1,11 @@
+Edit or create crontab:
+
+crontab -e
+
+Add line to foot of file:
+@reboot sh /home/pi/ttlauncher.sh
+
+To check if process is running type:
+ps aux | grep Twilight
+
+ 
