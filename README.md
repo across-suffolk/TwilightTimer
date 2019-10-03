@@ -27,12 +27,8 @@ The os module is used to create a timestamp file name for the log file each time
 
 ## Issues yet to resolve
 1. The log shows that the job function 'switch_off' is being called twice, two minutes apart, with the first occuring on time according to the schedule times obtained by PHP. Unusual that the second event occurs exactly 2 minutes later. 
-   * Could this be caused by serial schedules being set, one before midnight and one after
-   * The two minute difference may vary if the first schedule is set based on the previous days calculated times
-   * (currently very near to equinox).
-   * Possible solutions
-     * Run one-off jobs as tagged scheules (relayJob) and clear these jobs each time PHP is run.
-     * Run schedules as multi-treaded.
+   * SOLVED. Initialisation occuring after the previous off time was setting a schedule to switch off. A second schedule was then occuring at the 01:30 update. The exact 2 minute gap was coincidence of being near to the equinox and this being the time difference from one day to the next.  
+     * Solution: Run one-off (relay) jobs with tags and clear these jobs each time PHP update is run.
 
 2. SSH login needs to be secure - use SHA keys.
 
