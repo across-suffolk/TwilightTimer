@@ -1,4 +1,5 @@
-This is a first in many ways: first time with Python & PHP; relays, displays and GPIO; first use of GitHub. There will be many inefficiencies.
+This is a first in many ways: first time with Python & PHP; relays, displays and GPIO; first use of GitHub. 
+There will be many inefficiencies.
 
  # TwilightTimer
 Off-line variable twilight timer written in Python, using PHP.
